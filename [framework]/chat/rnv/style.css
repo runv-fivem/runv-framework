@@ -1,0 +1,53 @@
+/* RNV chat theme: lines bottom-left above the player card, 23px line height at 1080p. 1px = 0.0926vh */
+@font-face { font-family: 'BerninoCond'; src: url('fonts/Bernino_Sans_Condensed_Semibold.otf'); font-weight: 600; }
+
+#app, #app * { font-family: 'BerninoCond', sans-serif !important; font-weight: 600; }
+
+.chat-window {
+    top: auto !important;
+    left: 3.7vh !important;
+    bottom: 16.1vh !important;
+    width: 55vh !important;
+    max-width: none !important;
+    height: 13.5vh !important;
+    background: transparent !important;
+}
+
+.chat-window::after {
+    content: '\27F5';
+    position: absolute;
+    left: 0;
+    bottom: -2.8vh;
+    width: 3.4vh;
+    height: 1.6vh;
+    background: rgba(30, 25, 15, 0.75);
+    color: #f0ece8;
+    font-size: 1.4vh;
+    line-height: 1.6vh;
+    text-align: center;
+}
+
+.chat-messages {
+    height: 100% !important;
+    margin: 0 !important;
+    font-size: 1.5vh !important;
+    text-shadow: 0 0 0.3vh rgba(0, 0, 0, 0.8);
+}
+
+.msg { margin: 0 0 0.05vh 0 !important; line-height: 2.1vh; }
+.multiline { margin-left: 0 !important; text-indent: 0 !important; }
+.msg .time { margin-right: 1vh; }
+.msg .author { margin-right: 0.4vh; }
+
+.chat-input {
+    top: auto !important;
+    left: 3.7vh !important;
+    bottom: 12vh !important;
+    width: 55vh !important;
+    max-width: none !important;
+}
+
+.chat-input > div.input { background-color: rgba(20, 16, 10, 0.8) !important; }
+.prefix { font-size: 1.5vh !important; padding-left: 1vh !important; }
+textarea { font-size: 1.5vh !important; padding-left: 1vh !important; }
+.suggestions { background-color: rgba(20, 16, 10, 0.85) !important; font-size: 1.4vh !important; }

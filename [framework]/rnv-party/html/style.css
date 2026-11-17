@@ -1,0 +1,41 @@
+@font-face { font-family: 'BerninoCond'; src: url('fonts/Bernino_Sans_Condensed_Semibold.otf'); font-weight: 600; }
+@font-face { font-family: 'BerninoCond'; src: url('fonts/Bernino_Sans_Condensed_Bold.otf'); font-weight: 700; }
+@font-face { font-family: 'BerninoCond'; src: url('fonts/Bernino_Sans_Condensed_Extrabold_Italic.otf'); font-weight: 800; font-style: italic; }
+
+/* 1rem = 10px at 1080p */
+html { font-size: calc(100vh / 108); }
+* { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
+body { width: 100vw; height: 100vh; overflow: hidden; background: transparent; font-family: 'BerninoCond', sans-serif; color: #f0eeeb; }
+[v-cloak] { display: none; }
+
+.panel { position: absolute; left: 113.2rem; top: 25rem; width: 45.5rem; border-top: 0.3rem solid #edebea; }
+
+.top { padding: 2.8rem 2rem 2.4rem; background: rgba(44, 44, 44, 0.94); }
+.title { font-size: 3.6rem; font-weight: 800; font-style: italic; line-height: 1; }
+.tab { margin-top: 1.6rem; width: 15.2rem; height: 4rem; background: #c4fb2f; color: #000; border-radius: 0.2rem; font-size: 2.6rem; font-weight: 800; font-style: italic; display: flex; align-items: center; justify-content: center; }
+.label { margin-top: 2.2rem; font-size: 1.75rem; font-weight: 600; }
+.search { margin-top: 1rem; display: flex; }
+.search input { width: 35.8rem; height: 5rem; padding: 0 1.2rem; background: #1c1c1a; border: 0; border-left: 0.4rem solid #a0c632; outline: 0; color: #f0eeeb; font-family: 'BerninoCond', sans-serif; font-size: 1.7rem; font-weight: 600; user-select: text; }
+.search input::placeholder { color: #d8d6d2; }
+.go { width: 4.9rem; height: 5rem; margin-left: 0.7rem; background: #201b1a; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.go svg { width: 2.6rem; height: 2.6rem; fill: #e8e6e3; }
+
+.players { padding: 0.4rem 2rem 2.4rem; background: rgba(62, 54, 50, 0.78); }
+.players .label { margin: 1.8rem 0 0.8rem; }
+.slot { position: relative; height: 5.2rem; margin-bottom: 1rem; background: rgba(55, 51, 47, 0.92); border-left: 0.3rem solid #7d7c75; display: flex; align-items: center; }
+.slot svg { width: 2.6rem; height: 2.6rem; margin: 0 1.2rem 0 1.2rem; fill: #f0eeeb; }
+.pname { font-size: 1.75rem; font-weight: 600; }
+.x { position: absolute; right: 1.2rem; width: 2.6rem; height: 2.6rem; display: none; align-items: center; justify-content: center; cursor: pointer; }
+.slot:hover .x { display: flex; }
+.x svg { width: 1.8rem; height: 1.8rem; margin: 0; fill: none; stroke: #f0eeeb; stroke-width: 2.6; }
+
+.footer { height: 5.4rem; padding: 0 2rem; background: rgba(58, 51, 46, 0.95); display: flex; align-items: center; }
+.copy { width: 2.8rem; height: 2.8rem; margin-right: 1rem; background: rgba(0, 0, 0, 0.35); border-radius: 0.3rem; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.copy svg { width: 1.6rem; height: 1.6rem; fill: #e8e8e8; }
+.myid { flex: 1; font-size: 1.4rem; font-weight: 600; color: #d8d6d2; }
+.close { height: 3.2rem; padding: 0 0.8rem 0 0.5rem; background: rgba(0, 0, 0, 0.3); display: flex; align-items: center; font-size: 1.7rem; font-weight: 700; cursor: pointer; }
+.close .key { height: 2.2rem; padding: 0 0.5rem; margin-right: 0.7rem; background: #181310; border: 0.1rem solid #4a4946; font-size: 1.2rem; display: flex; align-items: center; }
+
+/* RNV UI rule: buttons and boxes get a very small radius; hover = white button, black text, smooth */
+.go, .close { border-radius: 0.3rem; transition: background-color 0.2s ease, color 0.2s ease; }
+.go:not(.off):hover, .close:not(.off):hover { background: #fff; color: #000; }

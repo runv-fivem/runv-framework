@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <script src="vue.global.prod.js"></script>
+</head>
+<body>
+<div id="app" v-cloak>
+    <div class="creator" v-if="open">
+        <div class="title">APPEARANCE</div>
+
+        <div class="tabs">
+            <div v-for="t in tabs" :key="t" class="tab" :class="{ active: tab === t }" @click="tab = t">
+                <svg v-if="t === 'face'" viewBox="0 0 24 24"><path d="M12 2C8 2 6 5 6 9c0 2 .4 3.4 1 4.6.4.9.6 1.9.6 2.8 0 1.6 1.9 3.6 4.4 3.6s4.4-2 4.4-3.6c0-.9.2-1.9.6-2.8.6-1.2 1-2.6 1-4.6 0-4-2-7-6-7zm-2.4 9.3a1 1 0 110-2 1 1 0 010 2zm4.8 0a1 1 0 110-2 1 1 0 010 2z"/></svg>
+                <svg v-else-if="t === 'hair'" viewBox="0 0 24 24"><path d="M12 3C7 3 4 6.5 4 11v4.5l2 1.5v-5l1.6-2.4L9 11l1.4-2.6L12 11l1.6-2.6L15 11l1.4-2.4L18 12v5l2-1.5V11c0-4.5-3-8-8-8z"/></svg>
+                <svg v-else-if="t === 'beard'" viewBox="0 0 24 24"><path d="M5 5v5c0 5 3 10 7 10s7-5 7-10V5l-2 4c-.5 1-1.5 1.5-2.6 1.3L12 10l-2.4.3C8.5 10.5 7.5 10 7 9L5 5zm7 7c1.3 0 2.6.6 3.2 1.4-1 .3-2 .1-3.2-.4-1.2.5-2.2.7-3.2.4.6-.8 1.9-1.4 3.2-1.4z"/></svg>
+                <svg v-else viewBox="0 0 24 24"><path d="M20 3l-5.5 6.5-3-.5-2 3-4-.5L3 14l3.5 1 2.5-1.5 2.5 1L9 19l1 1 3.5-4 .5-3 2.5-1 .5-3.5L20 3z"/></svg>
+            </div>
+        </div>
+
+        <div class="tiles">
+            <div v-for="i in counts[tab]" :key="tab + i" class="tile" :class="{ selected: state[tileKey] === i }" @click="select(tileKey, i)">
+                <div class="check" v-if="state[tileKey] === i">
+                    <svg viewBox="0 0 24 24"><path d="M9.5 16.2L5.3 12l-1.4 1.4 5.6 5.6 11-11-1.4-1.4z"/></svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="colors" v-if="tab !== 'scar'">
+            <template v-if="tab === 'face'">
+                <div class="label">SKIN COLOR</div>
+                <div class="swatches">
+                    <div v-for="(c, i) in skin" :key="'s' + i" class="swatch" :class="{ selected: state.skin === i + 1 }" :style="{ background: c.hex }" @click="select('skin', i + 1)"></div>
+                </div>
+                <div class="label">EYE COLOR</div>
+                <div class="swatches">
+                    <div v-for="(c, i) in eye" :key="'e' + i" class="swatch" :class="{ selected: state.eye === i + 1 }" :style="{ background: c.hex }" @click="select('eye', i + 1)"></div>
+                </div>
+                <div class="label">EYEBROW COLOR</div>
+                <div class="swatches">
+                    <div v-for="(hex, i) in palette" :key="'b' + i" class="swatch" :class="{ selected: state.brow === i + 1 }" :style="{ background: hex }" @click="select('brow', i + 1)"></div>
+                </div>
+            </template>
+            <template v-else>
+                <div class="label">{{ tab === 'hair' ? 'HAIR COLOR' : 'BEARD COLOR' }}</div>
+                <div class="swatches">
+                    <div v-for="(hex, i) in palette" :key="'h' + i" class="swatch" :class="{ selected: state[colorKey] === i + 1 }" :style="{ background: hex }" @click="select(colorKey, i + 1)"></div>
+                </div>
+            </template>
+        </div>
+
+        <div class="gender">
+            <div class="side" :class="{ active: gender === 'female' }" @click="setGender('female')">
+                <svg viewBox="0 0 24 24"><path d="M11 3C7.7 3 6 5.4 6 8.3c0 1.6.6 2.8 1.4 3.6-.3 1.3-1 2.3-2 3.1 1.5.4 3 .2 4.2-.6V16c-1.9.5-3.6 1.6-4.6 3.5V21h12v-1.5c-.9-1.7-2.4-2.8-4-3.3v-1.6c1.8-.3 3.3-1 4-2.1-1.4-.4-2-1.6-2-3.2V8.3C15 5.4 14 3 11 3z"/></svg>
+            </div>
+            <div class="side" :class="{ active: gender === 'male' }" @click="setGender('male')">
+                <svg viewBox="0 0 24 24"><path d="M10.5 3C8 3 6.5 4.8 6.5 7.4c0 1 .2 1.7.5 2.4L6 12.2l1.4.6c.1 1 .5 1.8 1.4 2.1V16c-2.3.6-4 2-4.8 4V21h12v-1c-.6-1.7-2-2.9-3.8-3.6v-1.7c1.9 0 3.3-.6 3.6-2.1l.9-.1-.3-2.4c.4-.7.6-1.5.6-2.6C17 4.8 14 3 10.5 3z"/></svg>
+            </div>
+        </div>
+
+        <div class="confirm" @click="confirm"><span class="key">E</span><span class="text">CONFIRM</span></div>
+
+        <div class="bottom">
+            <div class="btn" @click="quit"><span class="key">ESC</span>QUIT GAME</div>
+            <div class="btn">SETTINGS</div>
+        </div>
+    </div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

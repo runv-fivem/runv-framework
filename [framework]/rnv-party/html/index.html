@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <script src="vue.global.prod.js"></script>
+</head>
+<body>
+<div id="app" v-cloak>
+    <div class="panel" v-if="open">
+        <div class="top">
+            <div class="title">PARTY MANAGEMENT</div>
+            <div class="tab">PARTY</div>
+            <div class="label">Search</div>
+            <div class="search">
+                <input v-model="search" placeholder="ID" maxlength="10" spellcheck="false" @keydown.enter="invite">
+                <div class="go" @click="invite"><svg viewBox="0 0 24 24"><path d="M10 3a7 7 0 015.6 11.2l5.1 5.1-1.4 1.4-5.1-5.1A7 7 0 1110 3zm0 2a5 5 0 100 10 5 5 0 000-10z"/></svg></div>
+            </div>
+        </div>
+
+        <div class="players">
+            <div class="label">Players:</div>
+            <div v-for="i in max" :key="i" class="slot">
+                <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 110 20 10 10 0 010-20zm0 4a3 3 0 100 6 3 3 0 000-6zm0 8c-2.5 0-4.5 1.2-5 3a7.5 7.5 0 0010 0c-.5-1.8-2.5-3-5-3z"/></svg>
+                <span class="pname" v-if="members[i - 1]">{{ members[i - 1].name }}</span>
+                <div class="x" v-if="canRemove(members[i - 1])" @click="remove(members[i - 1])"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="copy" @click="copyId"><svg viewBox="0 0 24 24"><path d="M8 3h10v14h-2V5H8V3zM5 7h9v14H5V7z"/></svg></div>
+            <span class="myid">MY ID: {{ myId }}</span>
+            <div class="close" @click="close"><span class="key">ESC</span>CLOSE</div>
+        </div>
+    </div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

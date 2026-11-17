@@ -1,0 +1,157 @@
+@font-face { font-family: 'BerninoCond'; src: url('fonts/Bernino_Sans_Condensed_Semibold.otf'); font-weight: 600; }
+@font-face { font-family: 'BerninoCond'; src: url('fonts/Bernino_Sans_Condensed_Bold.otf'); font-weight: 700; }
+@font-face { font-family: 'BerninoNarrow'; src: url('fonts/Bernino_Sans_Narrow_Semibold.otf'); font-weight: 600; }
+
+/* 1rem = 10px at 1080p */
+html { font-size: calc(100vh / 108); }
+* { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
+body { width: 100vw; height: 100vh; overflow: hidden; background: transparent; font-family: 'BerninoCond', sans-serif; color: #fff; text-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.6); }
+[v-cloak] { display: none; }
+
+.key { min-width: 1.8rem; height: 1.8rem; padding: 0 0.4rem; background: rgba(30, 25, 15, 0.75); font-size: 1.2rem; font-weight: 700; display: flex; align-items: center; justify-content: center; text-shadow: none; }
+
+/* top-left */
+.net { position: absolute; left: 4.3rem; top: 2.2rem; font-size: 1.2rem; font-weight: 700; }
+.net span { margin-right: 4rem; }
+
+/* compass */
+.compass { position: absolute; left: 50%; top: 2.4rem; width: 73.5rem; height: 4.8rem; margin-left: -36.75rem; }
+.compass .marker { position: absolute; left: 50%; top: 0; width: 0.3rem; height: 1.8rem; margin-left: -0.15rem; background: #fff; }
+.compass .mark { position: absolute; top: 2.9rem; transform: translateX(-50%); font-size: 1.4rem; font-weight: 700; color: #c5c1b6; white-space: nowrap; }
+.compass .mark.cardinal { top: 2.5rem; font-size: 2rem; }
+
+/* player card */
+.card { position: absolute; left: 3.8rem; bottom: 5.8rem; width: 29rem; height: 5.4rem; background: rgba(20, 16, 10, 0.45); border-radius: 0.3rem; }
+.card .row { position: absolute; left: 1.1rem; right: 1.4rem; top: 0.7rem; display: flex; align-items: center; }
+.card .dot { width: 1rem; height: 1rem; border-radius: 50%; background: #76ff46; margin-right: 0.8rem; }
+.card .name { flex: 1; font-size: 1.6rem; font-weight: 600; }
+.card .voice { width: 1.6rem; height: 1.6rem; fill: rgba(255, 255, 255, 0.6); }
+.card .voice.talking { fill: #fff; }
+.card .bar { position: absolute; left: 0.6rem; right: 0.6rem; background: rgba(0, 0, 0, 0.35); }
+.card .bar .fill { height: 100%; transition: width 0.3s; }
+.card .armor { top: 3.1rem; height: 0.4rem; }
+.card .armor .fill { position: absolute; left: 0; top: 0; background: #21afd3; }
+.card .armor .max { position: absolute; left: 0; top: 0; height: 100%; background: rgba(33, 175, 211, 0.25); }
+.card .health { top: 4.1rem; height: 1rem; }
+.card .health .fill { background: repeating-linear-gradient(135deg, #e2ddd7 0, #e2ddd7 0.2rem, #bcb5af 0.2rem, #bcb5af 0.4rem); }
+
+/* SOLO chip */
+.chip { position: absolute; bottom: 2.2rem; display: flex; flex-direction: column; align-items: center; }
+.chip.solo { left: 35.7rem; width: 4.2rem; }
+.chip .circle { width: 4rem; height: 4rem; border-radius: 50%; background: rgba(30, 25, 15, 0.6); display: flex; align-items: center; justify-content: center; }
+.chip .circle svg { width: 2.6rem; height: 2.6rem; fill: #f0ece8; }
+.chip .label { margin-top: 0.2rem; padding: 0 0.6rem; height: 1.8rem; background: rgba(30, 25, 15, 0.6); font-size: 1.4rem; font-weight: 700; display: flex; align-items: center; }
+.chip .key { margin-top: 0.8rem; }
+
+/* Q hands */
+.hands { position: absolute; left: 50%; bottom: 2.2rem; margin-left: -2.6rem; width: 5.2rem; display: flex; flex-direction: column; align-items: center; }
+.hands .box { width: 5.2rem; height: 5.2rem; background: rgba(40, 35, 25, 0.55); display: flex; align-items: center; justify-content: center; }
+.hands .box svg { width: 3.8rem; height: 3.8rem; fill: #f0ece8; }
+.hands .key { margin-top: 1.8rem; }
+
+/* slots */
+.slots { position: absolute; right: 3.3rem; bottom: 2.2rem; display: flex; align-items: flex-start; }
+.slot { display: flex; flex-direction: column; align-items: center; margin-left: 0.6rem; }
+.slot .box { position: relative; width: 5.3rem; height: 5.2rem; background: rgba(40, 35, 25, 0.55); display: flex; align-items: center; justify-content: center; }
+.slot.wide .box { width: 13.6rem; }
+.slot .box svg { width: 3rem; height: 3rem; stroke: rgba(255, 255, 255, 0.35); stroke-width: 1.2; fill: none; }
+.slot .key { margin-top: 1.8rem; }
+.divider { width: 0.2rem; height: 4.6rem; margin: 0.3rem 0.4rem 0 2.2rem; background: #fff; }
+.slot.bag { margin-left: 0; }
+.slot.bag .box { width: 5.4rem; background: transparent; flex-direction: column; }
+.slot.bag .box svg { width: 3.4rem; height: 3.4rem; stroke: none; fill: #f0ece8; }
+.slot.bag .fill { width: 3.4rem; height: 0.3rem; margin-top: 0.3rem; background: rgba(0, 0, 0, 0.45); }
+.slot.bag .fill div { height: 100%; background: #fff; }
+
+/* notifications */
+.notifications { position: absolute; right: 3.8rem; top: 13.7rem; width: 28.4rem; }
+.notify { position: relative; margin-bottom: 1rem; padding: 1.4rem 1.8rem 0.8rem 6rem; background: rgba(37, 36, 32, 0.88); border-left: 0.4rem solid #12afe2; text-shadow: none; }
+.notify .icon { position: absolute; left: 1.6rem; top: 1.7rem; width: 2.6rem; height: 2.6rem; transform: rotate(45deg); border-radius: 0.3rem; }
+.notify .text { font-size: 1.6rem; font-weight: 600; line-height: 1.9rem; }
+.notify .countdown { margin-top: 0.2rem; text-align: right; font-size: 1.7rem; font-weight: 600; }
+
+/* progress */
+.progress { position: absolute; left: 50%; top: 86.6rem; width: 20rem; margin-left: -10rem; display: flex; flex-direction: column; align-items: center; }
+.progress .label { font-size: 1.9rem; font-weight: 700; }
+.progress .track { width: 20rem; height: 0.5rem; margin-top: 0.6rem; background: rgba(255, 255, 255, 0.25); }
+.progress .fill { height: 100%; background: #fff; transition-property: width; transition-timing-function: linear; }
+
+.nokeys .key { visibility: hidden; }
+.nkeys { margin-top: 0.8rem; display: flex; justify-content: flex-end; }
+.nkey { margin-left: 1.4rem; display: flex; align-items: center; font-size: 1.5rem; font-weight: 700; }
+.nkey b { height: 2.2rem; min-width: 2.2rem; padding: 0 0.5rem; margin-right: 0.6rem; background: #161616; border: 0.1rem solid #4a4946; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; }
+.slot .box.filled { background: rgba(88, 104, 52, 0.75); }
+.slot .box.equipped { outline: 0.2rem solid #c4fb32; }
+.slot .box img { max-width: 10rem; max-height: 4.4rem; }
+.slot .box .ammo { position: absolute; right: 0.5rem; bottom: 0.3rem; font-size: 1.6rem; font-weight: 700; color: #fff; }
+
+/* jail time banner */
+@font-face { font-family: 'BerninoCond'; src: url('fonts/Bernino_Sans_Condensed_Extrabold_Italic.otf'); font-weight: 800; font-style: italic; }
+.jail { position: absolute; left: 50%; top: 10rem; height: 6.2rem; margin-left: -17rem; padding: 0 2.6rem; background: rgba(40, 40, 38, 0.85); border-radius: 0.4rem; display: flex; align-items: center; text-shadow: none; }
+.jail svg { width: 3.4rem; height: 3.4rem; fill: #ece9e2; margin-right: 2rem; }
+.jail .label, .jail .years { font-size: 4rem; font-weight: 800; font-style: italic; }
+.jail .label { color: #ece9e2; margin-right: 1.8rem; }
+.jail .years { color: #e8443d; }
+
+/* interaction prompt */
+.prompt { position: absolute; left: 100.3rem; top: 59.8rem; text-shadow: none; } /* fixed spot, right of the character */
+/* rarity bar left of the title */
+.rbar { position: absolute; left: -0.85rem; top: 0; width: 0.5rem; height: 100%; border-radius: 0.2rem; }
+/* diamond on nearby interaction points */
+.mark { position: absolute; width: 0.85rem; height: 0.85rem; margin: -0.425rem 0 0 -0.425rem; border: 0.15rem solid #f2f0eb; transform: rotate(45deg); box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.6), inset 0 0 0.15rem rgba(0, 0, 0, 0.5); pointer-events: none; }
+.ptitle { position: relative; margin-left: 2.5rem; min-width: 18rem; width: max-content; white-space: nowrap; height: 4.7rem; padding: 0 1.3rem; background: rgba(30, 28, 26, 0.9); border-radius: 0.2rem; font-size: 2.53rem; font-weight: 700; display: flex; align-items: center; text-transform: uppercase; }
+/* squeezed a little to look narrower */
+.ttl { display: inline-block; transform: scaleX(0.75); transform-origin: left center; }
+.prow { margin-top: 0.4rem; display: flex; align-items: center; }
+.pkey { width: 1.8rem; height: 2rem; margin-right: 0.5rem; background: #0b0602; border: 0.1rem solid #55524c; font-size: 1.3rem; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.pbtn { width: 18.4rem; height: 3.7rem; background: rgba(24, 25, 15, 0.9); border: 0.25rem solid #e2ff7f; border-radius: 0.3rem; font-family: 'BerninoNarrow', sans-serif; font-size: 1.69rem; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+
+/* notoriety chips */
+.chip.lvl { left: 40.9rem; width: 4.2rem; bottom: 4.8rem; }
+.chip.bonus { width: 4.2rem; bottom: 4.8rem; }
+.chip.b1 { left: 46.2rem; }
+.chip.b2 { left: 51.6rem; }
+.chip.b3 { left: 57rem; }
+.chip.bonus .label { background: #b6f22f; color: #1d3a00; text-shadow: none; }
+
+/* criminal indicator */
+.criminal { position: absolute; left: 27.9rem; top: 4rem; width: 3.8rem; height: 3.8rem; border-radius: 0.3rem; background: #f3cf3f; display: flex; align-items: center; justify-content: center; }
+.criminal svg { width: 2.8rem; height: 2.8rem; fill: #170000; }
+
+/* option menu prompt */
+.mtitle { position: relative; margin-left: 2.5rem; min-width: 20.7rem; width: max-content; white-space: nowrap; height: 4.7rem; padding: 0 1.4rem; background: rgba(30, 28, 24, 0.75); border-radius: 0.3rem; font-size: 2.53rem; font-weight: 700; display: flex; align-items: center; text-transform: uppercase; }
+.mwheel { position: absolute; left: -2.5rem; width: 1.9rem; height: 1.9rem; fill: #ece8e2; }
+.mrow { position: relative; margin-top: 0.3rem; display: flex; align-items: center; }
+.mrow .pkey { position: absolute; left: 0.3rem; }
+.mopt { margin-left: 2.5rem; width: 20.9rem; height: 3.5rem; padding-left: 1.2rem; background: rgba(30, 28, 24, 0.75); border: 0.2rem solid transparent; border-radius: 0.3rem; font-family: 'BerninoNarrow', sans-serif; font-size: 1.69rem; font-weight: 600; display: flex; align-items: center; }
+.mopt.sel { border-color: #b9ec3c; }
+.micon { width: 1.8rem; height: 1.8rem; margin-right: 1rem; fill: #ece8e2; }
+.mprice { margin-left: 0.5rem; color: #e8c341; }
+
+/* damage number */
+.hit { position: absolute; transform: translate(-50%, -50%); font-size: 3rem; font-weight: 700; color: rgba(255, 255, 255, 0.92); text-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.6); pointer-events: none; animation: hit-rise 0.7s ease-out forwards; }
+@keyframes hit-rise { 0% { opacity: 0; margin-top: 0.6rem; } 15% { opacity: 1; margin-top: 0; } 70% { opacity: 1; } 100% { opacity: 0; margin-top: -2.4rem; } }
+
+/* party member cards */
+.card.mate { width: 25.1rem; height: 4.5rem; }
+.card.mate .health { top: 3.1rem; height: 0.8rem; }
+.card .crown { width: 1.5rem; height: 1.5rem; margin-left: 0.6rem; vertical-align: -0.2rem; fill: #e6c34a; }
+
+/* head names */
+.tag { position: absolute; transform: translate(-50%, -100%); display: flex; align-items: center; white-space: nowrap; font-size: 2.2rem; font-weight: 600; color: #f4f1ea; text-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.7); pointer-events: none; }
+.tag i { width: 1.4rem; height: 1.4rem; margin-right: 0.6rem; border-radius: 50%; box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.5); }
+.tag.r-criminal { color: #e8453c; }
+.tag.r-cop { color: #4a9cf0; }
+
+/* pickup feed */
+.pickfeed { position: absolute; left: 151.2rem; bottom: 30rem; display: flex; flex-direction: column; align-items: flex-start; }
+.pick { display: flex; height: 3rem; margin-top: 1.5rem; }
+.pbar { width: 0.55rem; height: 100%; margin-right: 0.25rem; border-radius: 0.2rem; }
+.pbody { height: 100%; padding: 0 1.6rem 0 0.6rem; background: rgba(28, 26, 23, 0.6); border-radius: 0.3rem; display: flex; align-items: center; text-shadow: none; }
+.pbody img { width: 3.9rem; height: 2.8rem; object-fit: contain; }
+.pbody span { margin-left: 1.3rem; font-family: 'BerninoNarrow', sans-serif; font-size: 1.45rem; font-weight: 600; color: #e9e6e0; white-space: nowrap; }
+.pick-enter-active, .pick-leave-active { transition: all 0.35s ease; }
+.pick-enter-from { opacity: 0; transform: translateX(3rem); }
+.pick-leave-to { opacity: 0; transform: translateY(-2rem); }
+.pick-leave-active { position: absolute; }
+.pick-move { transition: transform 0.35s ease; }

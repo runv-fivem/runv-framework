@@ -1,0 +1,50 @@
+@font-face { font-family: 'BerninoCond'; src: url('fonts/Bernino_Sans_Condensed_Semibold.otf'); font-weight: 600; }
+@font-face { font-family: 'BerninoCond'; src: url('fonts/Bernino_Sans_Condensed_Bold.otf'); font-weight: 700; }
+@font-face { font-family: 'BerninoCond'; src: url('fonts/Bernino_Sans_Condensed_Extrabold_Italic.otf'); font-weight: 800; font-style: italic; }
+
+/* 1rem = 10px at 1080p */
+html { font-size: calc(100vh / 108); }
+* { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
+body { width: 100vw; height: 100vh; overflow: hidden; background: transparent; font-family: 'BerninoCond', sans-serif; color: #fff; }
+[v-cloak] { display: none; }
+
+.creator { position: absolute; inset: 0; }
+
+.title { position: absolute; left: 3.6rem; top: 4.2rem; font-size: 6.8rem; font-weight: 800; font-style: italic; letter-spacing: 0.1rem; }
+
+.tabs { position: absolute; left: 3.8rem; top: 23rem; display: flex; flex-direction: column; }
+.tab { width: 4.2rem; height: 4.2rem; margin-bottom: 0.6rem; border-radius: 0.3rem; background: #1e1e1e; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.tab svg { width: 2.6rem; height: 2.6rem; fill: #f0ece8; }
+.tab.active { background: #c4fb32; }
+.tab.active svg { fill: #000; }
+
+.tiles { position: absolute; left: 11rem; top: 23rem; width: 48rem; display: flex; flex-wrap: wrap; }
+.tile { position: relative; width: 11.2rem; height: 12rem; margin: 0 0.8rem 0.8rem 0; background: #111; border: 0.2rem solid #000; border-radius: 0.3rem; cursor: pointer; }
+.tile.selected { border-color: #c4fb32; }
+.check { position: absolute; left: 0.6rem; top: 0.6rem; width: 2rem; height: 2rem; border-radius: 50%; background: #c4fb32; display: flex; align-items: center; justify-content: center; }
+.check svg { width: 1.5rem; height: 1.5rem; fill: #000; }
+
+.colors { position: absolute; left: 63.4rem; top: 23rem; width: 20.4rem; padding: 1.2rem 1.4rem 1rem; background: rgba(34, 32, 29, 0.85); }
+.label { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.9rem; }
+.swatches { display: flex; flex-wrap: wrap; margin-bottom: 1.4rem; }
+.swatch { width: 2.4rem; height: 2.4rem; margin: 0 0.6rem 0.6rem 0; border: 0.2rem solid transparent; border-radius: 0.2rem; cursor: pointer; }
+.swatch:nth-child(6n) { margin-right: 0; }
+.swatch.selected { border-color: #c4fb32; }
+
+.gender { position: absolute; right: 3.8rem; top: 10.5rem; width: 12.8rem; height: 5rem; border-radius: 2.5rem; background: #9a9894; display: flex; }
+.gender .side { width: 6.4rem; height: 5rem; border-radius: 2.5rem; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.gender .side svg { width: 3rem; height: 3rem; fill: #f0ece8; }
+.gender .side.active { background: #c5fa35; }
+.gender .side.active svg { fill: #000; }
+
+.confirm { position: absolute; right: 3.8rem; bottom: 10rem; width: 34rem; height: 4.2rem; background: #c4fb31; color: #000; display: flex; align-items: center; cursor: pointer; }
+.confirm .key { margin-left: 1.8rem; width: 2rem; height: 2.2rem; background: #6c7a43; color: #c4fb31; font-size: 1.3rem; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.confirm .text { flex: 1; text-align: center; margin-right: 3.8rem; font-size: 2rem; font-weight: 700; }
+
+.bottom { position: absolute; left: 0; right: 0; bottom: 0; height: 5.4rem; background: #161616; display: flex; align-items: center; padding-left: 3.8rem; }
+.btn { height: 3.2rem; padding: 0 1rem; margin-right: 2rem; background: #2a2826; display: flex; align-items: center; font-size: 1.6rem; font-weight: 600; cursor: pointer; }
+.btn .key { height: 2.2rem; padding: 0 0.5rem; margin-right: 0.8rem; background: #161616; font-size: 1.2rem; display: flex; align-items: center; }
+
+/* RNV UI rule: buttons and boxes get a very small radius; hover = white button, black text, smooth */
+.confirm, .btn { border-radius: 0.3rem; transition: background-color 0.2s ease, color 0.2s ease; }
+.confirm:not(.off):hover, .btn:not(.off):hover { background: #fff; color: #000; }

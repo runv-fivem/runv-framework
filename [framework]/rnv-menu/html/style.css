@@ -1,0 +1,104 @@
+@font-face { font-family: 'BerninoCond'; src: url('fonts/Bernino_Sans_Condensed_Semibold.otf'); font-weight: 600; }
+@font-face { font-family: 'BerninoCond'; src: url('fonts/Bernino_Sans_Condensed_Bold.otf'); font-weight: 700; }
+@font-face { font-family: 'BerninoCond'; src: url('fonts/Bernino_Sans_Condensed_Extrabold_Italic.otf'); font-weight: 800; font-style: italic; }
+
+/* 1rem = 10px at 1080p */
+html { font-size: calc(100vh / 108); }
+* { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
+body { width: 100vw; height: 100vh; overflow: hidden; background: transparent; font-family: 'BerninoCond', sans-serif; color: #f0efec; }
+[v-cloak] { display: none; }
+
+.settings { position: absolute; inset: 0; overflow: hidden; background: linear-gradient(110deg, #343331 0%, #3c3c3c 45%, #3a3a3a 70%, #343331 100%); }
+
+.mark { position: absolute; font-weight: 800; font-style: italic; line-height: 1; white-space: nowrap; pointer-events: none; }
+.mark-left { left: 2rem; top: -3rem; font-size: 46rem; color: rgba(255, 255, 255, 0.025); }
+.mark-right { left: 115rem; top: 30rem; font-size: 46rem; color: transparent; -webkit-text-stroke: 0.15rem rgba(255, 255, 255, 0.06); }
+
+/* full-screen frame = rnv-clans CLAN page: title, tabs, content top 23.3rem, bottom bar */
+.title { position: absolute; left: 3.6rem; top: 4.6rem; font-size: 6.6rem; font-weight: 800; font-style: italic; white-space: nowrap; transform: scaleX(0.75); transform-origin: left top; }
+
+.tabs { position: absolute; left: 3.6rem; top: 14.3rem; display: flex; }
+.tab { min-width: 17.2rem; height: 4.1rem; padding: 0 2rem; margin-right: 0.4rem; background: #1c1c1a; font-size: 2.1rem; font-weight: 800; font-style: italic; white-space: nowrap; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.tab.active { background: #c5ff39; color: #2f3a10; }
+
+.rows { position: absolute; left: 3.6rem; top: 23.3rem; width: 116.8rem; max-height: 77rem; overflow-y: auto; }
+.rows::-webkit-scrollbar { width: 0.5rem; }
+.rows::-webkit-scrollbar-thumb { background: #4a4a48; }
+.row { height: 5.2rem; margin-bottom: 0.4rem; background: #212121; display: flex; align-items: center; }
+.row .label { flex: 1; padding-left: 1.6rem; font-size: 1.75rem; font-weight: 600; }
+.row.disabled { background: #2c2c2c; }
+.section { height: 5rem; padding-top: 0.8rem; font-size: 3.2rem; font-weight: 800; font-style: italic; text-transform: uppercase; }
+.row.selected { outline: 0.25rem solid #e8e6e3; outline-offset: -0.25rem; }
+
+.desc { position: absolute; left: 126.7rem; top: 23.3rem; width: 56.8rem; padding: 1.6rem 1.5rem; background: rgba(33, 33, 33, 0.9); }
+.dtitle { font-size: 2.6rem; font-weight: 800; font-style: italic; text-transform: uppercase; }
+.dtext { margin-top: 0.6rem; font-size: 1.6rem; font-weight: 600; }
+.row.disabled .label, .row.disabled .value, .row.disabled .number { color: #6e6d6a; }
+.row.disabled .control { pointer-events: none; opacity: 0.6; }
+
+.control { width: 36.9rem; padding-right: 0.7rem; display: flex; align-items: center; }
+.arrow { width: 4rem; height: 4rem; background: #575654; border-radius: 0.2rem; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.arrow svg { width: 2rem; height: 2rem; fill: none; stroke: #f0efec; stroke-width: 2.6; }
+.value { flex: 1; text-align: center; font-size: 1.75rem; font-weight: 600; }
+.act { width: 12rem; height: 4rem; margin-left: auto; background: #575654; border-radius: 0.2rem; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; font-weight: 700; cursor: pointer; }
+.act:hover { background: #c5fb33; color: #000; }
+.bar { width: 30.8rem; height: 1.2rem; margin-left: 0.2rem; background: #242424; }
+.bar div { height: 100%; background: #575654; }
+
+/* KEY BINDINGS rows: label, two key boxes, bin */
+.keyrow { height: 5.2rem; margin-bottom: 0.4rem; display: flex; align-items: center; }
+.keyrow .label { flex: 1; height: 100%; display: flex; align-items: center; padding-left: 1.6rem; background: #212121; font-size: 1.75rem; font-weight: 600; }
+.keyrow .label.alert { color: #ff6b5e; }
+.keybox { width: 16.6rem; height: 100%; margin-left: 0.7rem; background: #5c5b59; display: flex; align-items: center; justify-content: center; font-size: 1.75rem; font-weight: 600; cursor: pointer; }
+.keybox:hover { outline: 0.25rem solid #e8e6e3; outline-offset: -0.25rem; }
+.keybox.waiting { background: #c5fb33; color: #000; }
+.keyrow.disabled .keybox, .keyrow.disabled .label { color: #6e6d6a; cursor: default; }
+.trash { width: 2.4rem; height: 100%; margin-left: 0.4rem; background: #2b2a27; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.trash svg { width: 1.6rem; height: 1.6rem; fill: #8a8986; }
+
+/* GTA's own prompts (key conflict, ...) */
+.modal { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.55); display: flex; align-items: center; justify-content: center; }
+.mbox { width: 64rem; padding: 2.4rem; background: #2b2a27; }
+.mtitle { font-size: 3.2rem; font-weight: 800; font-style: italic; }
+.mtext { margin: 1.4rem 0 2.4rem; font-size: 1.9rem; font-weight: 600; }
+.mbuttons { display: flex; justify-content: flex-end; }
+.mbuttons .btn { margin: 0 0 0 3rem; }
+.mbuttons .btn.yes { color: #c5ff39; }
+
+.check-wrap { justify-content: flex-end; }
+.check { width: 2.6rem; height: 2.6rem; margin-right: 0.8rem; border-radius: 50%; background: #2f2f2d; border: 0.2rem solid #1c1c1b; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.check.on { background: #c5fb33; border-color: #c5fb33; }
+.check svg { width: 1.8rem; height: 1.8rem; fill: none; stroke: #071f00; stroke-width: 3; }
+
+input[type=range] { -webkit-appearance: none; width: 30.8rem; height: 1.2rem; margin-left: 0.2rem; background: #242424 linear-gradient(#575654, #575654) no-repeat; outline: none; cursor: pointer; }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 0.8rem; height: 2.6rem; background: #eee9e5; border-radius: 0.1rem; }
+.number { flex: 1; text-align: right; padding-right: 0.3rem; font-size: 1.75rem; font-weight: 600; }
+
+.confirm { position: absolute; right: 3.6rem; top: 93.6rem; width: 30.9rem; height: 4.3rem; background: #c5fb33; color: #000; display: flex; align-items: center; cursor: pointer; }
+.confirm .key { margin-left: 1.8rem; padding: 0 0.6rem; height: 2.4rem; background: #6c7a43; color: #c5fb33; font-size: 1.3rem; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.confirm .text { flex: 1; text-align: center; margin-right: 3.8rem; font-size: 2rem; font-weight: 700; }
+
+.bottom { position: absolute; left: 0; top: 102.6rem; width: 100%; height: 5.4rem; background: #161616; display: flex; align-items: center; padding-left: 3.8rem; }
+.btn { display: flex; align-items: center; margin-right: 4rem; font-size: 1.7rem; font-weight: 700; cursor: pointer; }
+.btn .key { height: 2.4rem; min-width: 2.4rem; padding: 0 0.6rem; margin-right: 0.9rem; background: #3a3833; border: 0.1rem solid #6b6964; font-size: 1.3rem; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+
+/* Pause menu (right side panel) */
+.pause { position: absolute; top: 0; bottom: 0; right: 0; display: flex; }
+.panel { position: relative; width: 40.5rem; height: 100%; background: linear-gradient(180deg, rgba(48, 50, 56, 0.88) 0%, rgba(40, 33, 30, 0.88) 40%, rgba(38, 31, 27, 0.9) 100%); }
+.pname { position: absolute; left: 3.3rem; top: 5.8rem; font-size: 3.6rem; font-weight: 800; font-style: italic; color: #c5fb30; }
+.uid { position: absolute; left: 3.7rem; top: 11rem; display: flex; align-items: center; font-size: 1.6rem; font-weight: 600; color: #d8dbdf; }
+.copy { width: 2.6rem; height: 2.6rem; margin-right: 0.8rem; background: rgba(0, 0, 0, 0.35); border-radius: 0.3rem; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.copy svg { width: 1.6rem; height: 1.6rem; fill: #e8e8e8; }
+.buttons { position: absolute; left: 3.7rem; top: 17.2rem; width: 33.6rem; }
+.pbtn { height: 6.4rem; margin-bottom: 1rem; background: rgba(28, 24, 22, 0.85); border-radius: 0.3rem; display: flex; align-items: center; cursor: pointer; }
+.pbtn.selected { outline: 0.3rem solid #ecebe9; }
+.pbtn svg { width: 3.6rem; height: 3.6rem; margin: 0 1.6rem 0 1.4rem; fill: #f2f2f0; }
+.pbtn span { font-size: 2.6rem; font-weight: 800; font-style: italic; }
+.discord { position: absolute; left: 3.3rem; bottom: 5rem; width: 34rem; height: 4rem; background: #4e5355; color: #c5fb30; font-size: 2.1rem; font-weight: 800; font-style: italic; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.discord svg { width: 2.2rem; height: 2.2rem; margin-left: 0.8rem; fill: #c5fb30; }
+.strip { width: 12rem; height: 100%; background: #c5fb30; position: relative; }
+.strip span { position: absolute; top: 10rem; left: 3.2rem; writing-mode: vertical-rl; font-size: 6rem; font-weight: 800; font-style: italic; color: #97c717; letter-spacing: 0.2rem; }
+
+/* RNV UI rule: buttons and boxes get a very small radius; hover = white button, black text, smooth */
+.arrow, .act, .keybox, .confirm, .pbtn, .discord { border-radius: 0.3rem; transition: background-color 0.2s ease, color 0.2s ease; }
+.arrow:not(.off):hover, .act:not(.off):hover, .keybox:not(.off):hover, .confirm:not(.off):hover, .pbtn:not(.off):hover, .discord:not(.off):hover { background: #fff; color: #000; }

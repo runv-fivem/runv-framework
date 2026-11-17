@@ -1,0 +1,23 @@
+@font-face { font-family: 'BerninoCond'; src: url('fonts/Bernino_Sans_Condensed_Semibold.otf'); font-weight: 600; }
+@font-face { font-family: 'BerninoCond'; src: url('fonts/Bernino_Sans_Condensed_Bold.otf'); font-weight: 700; }
+@font-face { font-family: 'BerninoCond'; src: url('fonts/Bernino_Sans_Condensed_Extrabold_Italic.otf'); font-weight: 800; font-style: italic; }
+
+/* 1rem = 10px at 1080p */
+html { font-size: calc(100vh / 108); }
+* { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
+body { width: 100vw; height: 100vh; overflow: hidden; background: transparent; font-family: 'BerninoCond', sans-serif; }
+[v-cloak] { display: none; }
+
+.band { position: absolute; left: 0; right: 0; top: 40.8rem; height: 19.9rem; background: #eeeae4; border-top: 0.1rem solid #fff; border-bottom: 0.1rem solid #fff; display: flex; flex-direction: column; align-items: center; }
+.title { margin-top: 3.2rem; font-size: 6.6rem; font-weight: 800; font-style: italic; color: #020000; line-height: 1; }
+.input { margin-top: 2.2rem; width: 62rem; height: 5rem; background: #747270; border-left: 0.6rem solid #c4fa38; border-radius: 0.2rem; }
+.input input { width: 100%; height: 100%; padding: 0 1.2rem; border: 0; outline: 0; background: transparent; color: #f0efed; font-family: 'BerninoCond', sans-serif; font-size: 1.9rem; font-weight: 600; user-select: text; }
+
+.bar { position: absolute; left: 0; right: 0; top: 60.8rem; height: 6.3rem; background: #161616; display: flex; justify-content: center; align-items: center; }
+
+.button { width: 34rem; height: 4.2rem; background: #c4fb31; color: #000; font-size: 2rem; font-weight: 700; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.button.play { position: absolute; left: 3.8rem; bottom: 4.6rem; }
+
+/* RNV UI rule: buttons and boxes get a very small radius; hover = white button, black text, smooth */
+.button { border-radius: 0.3rem; transition: background-color 0.2s ease, color 0.2s ease; }
+.button:not(.off):hover { background: #fff; color: #000; }
