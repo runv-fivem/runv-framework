@@ -1,0 +1,141 @@
+-- Add additional functions to the standard table library
+
+lib.table = table
+local pairs = pairs
+
+local function contains(tbl, value)
+    if type(value) ~= 'table' then
+        for _, v in pairs(tbl) do
+            if v == value then
+                return true
+            end
+        end
+
+        return false
+    else
+        local set = {}
+
+        for _, v in pairs(tbl) do
+            set[v] = true
+        end
+
+        for _, v in pairs(value) do
+            if not set[v] then
+                return false
+            end
+        end
+
+        return true
+    end
+end
+
+local function table_matches(t1, t2)
+	local type1, type2 = type(t1), type(t2)
+
+	if type1 ~= type2 then return false end
+	if type1 ~= 'table' and type2 ~= 'table' then return t1 == t2 end
+
+    for k, v1 in pairs(t1) do
+        local v2 = t2[k]
+        if v2 == nil or not table_matches(v1, v2) then
+            return false
+        end
+    end
+
+    for k in pairs(t2) do
+        if t1[k] == nil then
+            return false
+        end
+    end
+
+    return true
+end
+
+local function table_deepclone(tbl)
+    tbl = table.clone(tbl)
+
+    for k, v in pairs(tbl) do
+        if type(v) == 'table' then
+            tbl[k] = table_deepclone(v)
+        end
+    end
+
+    return tbl
+end
+
+local function table_merge(t1, t2, addDuplicateNumbers)
+    addDuplicateNumbers = addDuplicateNumbers == nil or addDuplicateNumbers
+    for k, v2 in pairs(t2) do
+        local v1 = t1[k]
+        local type1 = type(v1)
+        local type2 = type(v2)
+
+        if type1 == 'table' and type2 == 'table' then
+            table_merge(v1, v2, addDuplicateNumbers)
+        elseif addDuplicateNumbers and (type1 == 'number' and type2 == 'number') then
+            t1[k] = v1 + v2
+        else
+            t1[k] = v2
+        end
+    end
+
+    return t1
+end
+
+local function shuffle(tbl)
+    local len = #tbl
+    for i = len, 2, -1 do
+        local j = math.random(i)
+        tbl[i], tbl[j] = tbl[j], tbl[i]
+    end
+    return tbl
+end
+
+
+local function map(tbl, fn)
+    local result = {}
+    for k, v in pairs(tbl) do
+        result[k] = fn(v, k)
+    end
+    return result
+end
+
+table.contains = contains
+table.matches = table_matches
+table.deepclone = table_deepclone
+table.merge = table_merge
+table.shuffle = shuffle
+table.map = map
+
+local frozenNewIndex = function(self) error(('cannot set values on a frozen table (%s)'):format(self), 2) end
+local _rawset = rawset
+
+function rawset(tbl, index, value)
+    if table.isfrozen(tbl) then
+        frozenNewIndex(tbl)
+    end
+
+    return _rawset(tbl, index, value)
+end
+
+function table.freeze(tbl)
+    local copy = table.clone(tbl)
+    local metatbl = getmetatable(tbl)
+
+    table.wipe(tbl)
+    setmetatable(tbl, {
+        __index = metatbl and setmetatable(copy, metatbl) or copy,
+        __metatable = 'readonly',
+        __newindex = frozenNewIndex,
+        __len = function() return #copy end,
+        __pairs = function() return next, copy end,
+    })
+
+    return tbl
+end
+
+function table.isfrozen(tbl)
+    return getmetatable(tbl) == 'readonly'
+end
+
+return lib.table

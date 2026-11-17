@@ -1,0 +1,93 @@
+local contextMenus = {}
+local openContextMenu = nil
+
+
+
+
+local function closeContext(_, cb, onExit)
+    if cb then cb(1) end
+
+    lib.resetNuiFocus()
+
+    if not openContextMenu then return end
+
+    if (cb or onExit) and contextMenus[openContextMenu].onExit then contextMenus[openContextMenu].onExit() end
+
+    if not cb then SendNUIMessage({ action = 'hideContext' }) end
+
+    openContextMenu = nil
+end
+
+function lib.showContext(id)
+    if not contextMenus[id] then error('No context menu of such id found.') end
+
+    local data = contextMenus[id]
+    openContextMenu = id
+
+    lib.setNuiFocus(false)
+
+    SendNuiMessage(json.encode({
+        action = 'showContext',
+        data = {
+            title = data.title,
+            position = data.position,
+            canClose = data.canClose,
+            menu = data.menu,
+            options = data.options
+        }
+    }, { sort_keys = true }))
+end
+
+function lib.registerContext(context)
+    for k, v in pairs(context) do
+        if type(k) == 'number' then
+            contextMenus[v.id] = v
+        else
+            contextMenus[context.id] = context
+            break
+        end
+    end
+end
+
+function lib.getOpenContextMenu() return openContextMenu end
+
+function lib.hideContext(onExit) closeContext(nil, nil, onExit) end
+
+RegisterNUICallback('openContext', function(data, cb)
+    cb(1)
+
+    local menu = openContextMenu and contextMenus[openContextMenu]
+    if data.back and menu and menu.onBack then menu.onBack() end
+
+    lib.showContext(data.id)
+end)
+
+RegisterNUICallback('clickContext', function(id, cb)
+    cb(1)
+
+    if math.type(tonumber(id)) == 'float' then
+        id = math.tointeger(id)
+    elseif tonumber(id) then
+        id = id + 1
+    end
+
+    local menu = openContextMenu and contextMenus[openContextMenu]
+    local data = menu and menu.options[id]
+    if not data then return end
+
+    if not data.event and not data.serverEvent and not data.onSelect then return end
+
+    openContextMenu = nil
+
+    SendNUIMessage({ action = 'hideContext' })
+    lib.resetNuiFocus()
+
+    if data.onSelect then data.onSelect(data.args) end
+    if data.event then TriggerEvent(data.event, data.args) end
+    if data.serverEvent then TriggerServerEvent(data.serverEvent, data.args) end
+end)
+
+RegisterNUICallback('closeContext', closeContext)
+
+
+

@@ -1,0 +1,11 @@
+local maxProps = GetConvarInt('rnv:progressPropLimit', 2)
+
+RegisterNetEvent('rnv-lib:progressProps', function(props)
+    if type(props) == 'table' then
+        props = #props > maxProps and { table.unpack(props, 1, maxProps) } or props
+    else
+        props = nil
+    end
+
+    Player(source).state:set('lib:progressProps', props, true)
+end)

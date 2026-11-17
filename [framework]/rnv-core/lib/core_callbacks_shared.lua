@@ -1,0 +1,52 @@
+local registeredCallbacks = {}
+
+AddEventHandler('onResourceStop', function(resourceName)
+    if cache.resource == resourceName then return end
+
+    for callbackName, resource in pairs(registeredCallbacks) do
+        if resource == resourceName then
+            registeredCallbacks[callbackName] = nil
+        end
+    end
+end)
+
+function lib.setValidCallback(callbackName, isValid)
+    local resourceName = GetInvokingResource() or cache.resource
+    local callbackResource = registeredCallbacks[callbackName]
+
+    if callbackResource then
+        if not isValid then
+            callbackResource[callbackName] = nil
+            return
+        end
+
+        if callbackResource == resourceName then return end
+
+        local errMessage = ("^1resource '%s' attempted to overwrite callback '%s' owned by resource '%s'^0"):format(resourceName, callbackName, callbackResource)
+
+        return print(('^1SCRIPT ERROR: %s^0\n%s'):format(errMessage,
+            Citizen.InvokeNative(joaat('FORMAT_STACK_TRACE') & 0xFFFFFFFF, nil, 0, Citizen.ResultAsString()) or ''))
+    end
+
+    lib.print.verbose(("set valid callback '%s' for resource '%s'"):format(callbackName, resourceName))
+
+    registeredCallbacks[callbackName] = resourceName
+end
+
+function lib.isCallbackValid(callbackName)
+    return registeredCallbacks[callbackName] == (GetInvokingResource() or cache.resource)
+end
+
+local cbEvent = '__rnv_cb_%s'
+
+RegisterNetEvent('rnv-lib:validateCallback', function(callbackName, invokingResource, key)
+    if registeredCallbacks[callbackName] then return end
+
+    local event = cbEvent:format(invokingResource)
+
+    if cache.game == 'fxserver' then
+        return TriggerClientEvent(event, source, key, 'cb_invalid')
+    end
+
+    TriggerServerEvent(event, key, 'cb_invalid')
+end)
