@@ -79,7 +79,7 @@ local function buildSuggestion(commandName, properties)
 end
 
 function lib.addCommand(commandName, properties, cb, ...)
-    -- Try to handle backwards-compatibility with the old addCommand syntax (prior to v3.0)
+    -- Also accept the old addCommand syntax (before v3.0)
     local restricted, params
 
     if properties then

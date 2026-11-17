@@ -1,4 +1,4 @@
--- DataView (MIT, see NOTICE.md)
+-- DataView: read and write binary data in a string buffer
 
 
 

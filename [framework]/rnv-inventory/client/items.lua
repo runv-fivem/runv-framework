@@ -103,7 +103,7 @@ local function rnvNotify(text)
 	exports['rnv-interface']:Notify({ text = text, type = 'error', duration = 3000 })
 end
 
--- Steel Plate (ROB RUN 'Armor segments' 1 / 2, use 1.3 s / 1.6 s): fills the worn vest that many bars (25 each)
+-- Steel Plate (1 / 2 bars, use 1.3 s / 1.6 s): fills the worn vest that many bars (25 each)
 local function steelPlate(bars, time)
 	return function(data, slot)
 		local vest = exports['rnv-inventory']:GetVest()
@@ -118,7 +118,7 @@ end
 Item('steel_plate_1', steelPlate(1, 1300))
 Item('steel_plate_2', steelPlate(2, 1600))
 
--- Medicine (ROB RUN 'Healing amount' / 'Use' time). Health is 100-200 on the freemode ped, so +N heals N
+-- Medicine (healing amount and use time from the item data). Health is 100-200 on the freemode ped, so +N heals N
 local function heal(amount, time, label)
 	return function(data, slot)
 		if GetEntityHealth(cache.ped) >= GetEntityMaxHealth(cache.ped) then return rnvNotify('You are already at [[full health]]') end
@@ -132,7 +132,7 @@ Item('afak', heal(100, 9000, 'HEALING...'))
 Item('painkillers_1', heal(25, 1800, 'TAKING PILLS...'))
 Item('painkillers_2', heal(40, 1800, 'TAKING PILLS...'))
 
--- Injector: heals over 5 ticks of 1 s (ROB RUN 'Effect ticks' 5); no healing amount in the data: 10 / 15 per tick
+-- Injector: heals over 5 ticks of 1 s ; no healing amount in the item data: 10 / 15 per tick
 local function injector(perTick)
 	return function(data, slot)
 		if not useWithAnim('INJECTING...', 'missheistdockssetup1clipboard@idle_a', 'idle_a', 49, 900) then return end

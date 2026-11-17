@@ -132,7 +132,7 @@ function lib.points.new(...)
         self.id = id
         self.remove = removePoint
     else
-        -- Backwards compatibility for original implementation (args: coords, distance, data)
+        -- Old call style still works (args: coords, distance, data)
         self = {
             id = id,
             coords = args[1],

@@ -11,7 +11,7 @@
     <div class="inv" v-if="visible" :class="[market ? market.mode : '', { dragging: !!drag }]" @mousemove="onMove" @mouseup="onUp($event)" @contextmenu.prevent>
         <div class="layout">
 
-            <!-- RUN V Black Market (WIKI ui/market.jpg): catalog left, own bag/equipment right -->
+            <!-- Black Market: catalog left, own bag/equipment right -->
             <template v-if="market && market.mode === 'market'">
                 <div class="bm-mark">BLACK MARKET</div>
                 <div class="bm-title">BLACK MARKET</div>
@@ -48,7 +48,7 @@
                 </div>
             </template>
 
-            <!-- RUN V Plot Plan (WIKI housing/land-plot-modification.webp): structure slots left, bag right -->
+            <!-- Plot Plan: structure slots left, bag right -->
             <div class="panel left plot" v-if="market && market.mode === 'plot'" data-hlsl>
                 <div class="head"><div class="title">LAND PLOT</div></div>
                 <div class="plot-label l1">Basic Structures</div>
@@ -62,7 +62,7 @@
                 </div>
             </div>
 
-            <!-- RUN V Laundering Desk (WIKI laundering/launder-desk.jpg + launder-transfer.jpg) -->
+            <!-- Laundering Desk -->
             <div class="ldesk" v-if="market && market.mode === 'desk'" data-hlsl>
                 <div class="desk-title">LAUNDERING DESK</div>
                 <div class="desk-help">?</div>
@@ -102,7 +102,7 @@
                 </div>
             </div>
 
-            <!-- RUN V Smuggler's Van (WIKI production/smuggler-cargo-sale.webp, 1024px: x 1.875) -->
+            <!-- Smuggler's Van -->
             <div class="smug" v-if="market && market.mode === 'smuggler'" data-hlsl>
                 <div class="smug-title">SMUGGLER'S VAN</div>
                 <div class="desk-help smug-help">?</div>
@@ -120,7 +120,7 @@
                 <div class="smug-close" @click="close"><span class="key">ESC</span>CLOSE</div>
             </div>
 
-            <!-- RUN V Grow Table (WIKI production/grow-room.webp, right frame) -->
+            <!-- Grow Table -->
             <div class="panel left grow" v-if="market && market.mode === 'grow'" data-hlsl>
                 <div class="head"><div class="title">{{ market.title }}</div><div class="desk-help grow-help">?</div></div>
                 <div class="pots">
@@ -135,7 +135,7 @@
                 </div>
             </div>
 
-            <!-- RUN V Suspicious Door (WIKI motel/suspicious-door-barter.webp) -->
+            <!-- Suspicious Door -->
             <div class="door-panel" v-if="market && market.mode === 'door'">
                 <div class="door-title">SUSPICIOUS DOOR</div>
                 <div class="door-list">
@@ -250,7 +250,7 @@
             <img :src="image(drag.item)" draggable="false">
         </div>
 
-        <!-- Confirm / amount window (USER-SCREENSHOTS CONFIRMATION.png, AMMO-BUY.png) -->
+        <!-- Confirm / amount window -->
         <div v-if="modal" class="modal" data-hlsl data-blur-strength="10">
             <div class="mband">
                 <div class="mtitle">{{ modal.title }}</div>

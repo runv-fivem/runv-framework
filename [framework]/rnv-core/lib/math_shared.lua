@@ -89,13 +89,13 @@ function math.tohex(n, upper)
     return formatString:format(n)
 end
 
-function math.groupdigits(number, seperator) -- credit http://richard.warburton.it
+function math.groupdigits(number, seperator) -- number to a string with group separators
     local left, num, right = string.match(number, '^([^%d]*%d)(%d*)(.-)$')
     return left .. (num:reverse():gsub('(%d%d%d)', '%1' .. (seperator or ',')):reverse()) .. right
 end
 
-function math.clamp(val, lower, upper)                    -- credit https://love2d.org/forums/viewtopic.php?t=1856
-    if lower > upper then lower, upper = upper, lower end -- swap if boundaries supplied the wrong way
+function math.clamp(val, lower, upper)                    -- keeps val between lower and upper
+    if lower > upper then lower, upper = upper, lower end -- swap if the limits come the wrong way round
     return math.max(lower, math.min(upper, val))
 end
 

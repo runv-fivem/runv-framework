@@ -1,6 +1,6 @@
-// Glass blur: draws the live game, blurred, behind every element with data-hlsl (CSS can't blur the game).
-// From gtasnail/fivem-glsl gamerender.js (MIT, Kypos). Changes: elements are looked up every frame (Vue adds and
-// removes panels), nothing is drawn while none exist, and element backgrounds are left alone (tint them in CSS).
+// Glass blur: draws the live game, blurred, behind every element with data-hlsl (CSS can't blur the game)
+// Glass panels: blurs the live game frame behind marked elements. Elements are looked up every frame (Vue adds and
+// removes panels), nothing is drawn while none exist, and element backgrounds are left alone (tint them in CSS)
 (() => {
     const config = { resolutionScale: 0.5, defaultBlurStrength: 8, maxBlurSize: 20 };
 
@@ -56,7 +56,7 @@
         return shader;
     }
 
-    // FiveM puts the game frame into a texture made exactly like this. Keep it byte for byte.
+    // FiveM puts the game frame into a texture made exactly like this. Keep it byte for byte
     function createTexture(gl) { //thanks fxdk
         const tex = gl.createTexture();
         const texPixels = new Uint8Array([0, 0, 255, 255]);

@@ -1,4 +1,4 @@
--- DO NOT USE! Old syntax for addCommand (prior to v3.0)
+-- Don't use: old syntax for addCommand (before v3.0)
 
 
 local commands = {}

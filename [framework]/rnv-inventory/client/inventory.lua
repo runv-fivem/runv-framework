@@ -5,7 +5,7 @@ local Inventory = {}
 Inventory.Dumpsters = lib.array:new(218085040, 666561306, -58485588, -206690185, 1511880420, 682791951)
 
 if shared.networkdumpsters then
-    -- Make sure dumpsters are frozen to ensure persistent position across clients
+    -- Dumpsters are frozen so they stay in the same spot for every player
     SetInterval(function()
         local objects = GetGamePool('CObject')
 

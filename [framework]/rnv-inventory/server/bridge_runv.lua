@@ -1,4 +1,4 @@
--- RUN V bridge (copied from the qbx bridge). Cash is the 'money' item: Core has no cash balance, so no account sync
+-- RUN V bridge. Cash is the 'money' item: Core has no cash balance, so no account sync
 local Inventory = require 'server.inventory'
 
 local function setupPlayer(player)

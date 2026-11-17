@@ -463,11 +463,7 @@ lib.callback.register('rnv-inventory:useItem', function(source, itemName, slot, 
                 end
             elseif not item.weapon and server.UseItem then
                 inventory.usingItem = data
-                -- This is used to call an external useItem function, i.e. ESX.UseItem
-                -- If an error is being thrown on item use there is no internal solution. We previously kept a list
-                -- of usable items which led to issues when restarting resources (for obvious reasons), but config
-                -- developers complained the inventory broke their items. Safely invoking registered item callbacks
-                -- should resolve issues, i.e. https://github.com/esx-framework/esx-legacy/commit/9fc382bbe0f5b96ff102dace73c424a53458c96e
+                -- A framework's own useItem function, if it has one (pcall: its errors don't break the inventory)
                 return pcall(server.UseItem, source, data.name, data)
             end
 

@@ -26,7 +26,6 @@ local function syncClient(player)
     TriggerClientEvent('rnv:client:setPlayerData', player.source, clientData(player))
 end
 
----@return integer userId
 function RNV.EnsureUser(src, name)
     local identifier = RNV.GetIdentifier(src)
     local userId = MySQL.scalar.await('SELECT userId FROM users WHERE identifier = ?', { identifier })
@@ -51,9 +50,8 @@ local function newCitizenId()
     end
 end
 
----@return boolean
 function RNV.Login(src)
-    src = tonumber(src) --[[@as integer]]
+    src = tonumber(src)
     if RNV.Players[src] or loading[src] then return false end
     if not getLicense(src) then return false end
     loading[src] = true
@@ -104,7 +102,6 @@ function RNV.Login(src)
     return true
 end
 
----@return boolean
 function RNV.Save(src)
     local player = RNV.Players[tonumber(src)]
     if not player then return false end
@@ -116,7 +113,7 @@ function RNV.Save(src)
 end
 
 function RNV.Logout(src)
-    src = tonumber(src) --[[@as integer]]
+    src = tonumber(src)
     local player = RNV.Players[src]
     if not player then return false end
 
@@ -161,8 +158,6 @@ function RNV.SetMetadata(src, key, value)
 end
 
 -- nickname: 3-16 letters, digits or _, and nobody else can have it
----@return boolean ok
----@return string? err 'invalid' | 'taken'
 function RNV.SetName(src, name)
     local player = RNV.Players[tonumber(src)]
     if not player or type(name) ~= 'string' or not name:match('^[%w_]+$') or #name < 3 or #name > 16 then

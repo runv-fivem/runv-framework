@@ -6,7 +6,7 @@ function lib.inputDialog(heading, rows, options)
     if input then return end
     input = promise.new()
 
-    -- Backwards compat with string tables (build a normalized copy, don't mutate caller's rows)
+    -- Old string rows still work (a copy is made, the caller's rows stay as they are)
     local normalized = table.create(#rows, 0)
 
     for i = 1, #rows do

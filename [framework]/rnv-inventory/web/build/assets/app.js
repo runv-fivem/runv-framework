@@ -1,13 +1,13 @@
 // RUN V inventory UI (Vue, no build step). Same NUI protocol as rnv-inventory's original UI:
 //   from Lua: init, setupInventory, refreshSlots, closeInventory, setInventoryVisible, ataCatalog, market
 //   to Lua:   uiLoaded, swapItems, useItem, exit, marketAction
-// Grid: 6 columns, slot N = cell, an item sits at its top-left slot and covers size { w, h } (server checks the same rules).
+// Grid: 6 columns, slot N = cell, an item sits at its top-left slot and covers size { w, h } (server checks the same rules)
 
 const COLS = 6;
 const GRID = 54;
 const SLOT_W1 = 55, SLOT_W2 = 56, SLOT_ARMOR = 57, SLOT_BAG = 58, SLOT_POUCH = 59, POUCH_FIRST = 60;
 const CELL_REM = 7.6; // cell 7.5rem + 0.1rem gap
-const MONEY_STACK = 25000; // AtaOx.MoneyStack
+const MONEY_STACK = 25000; // Extras.MoneyStack
 
 const resourceName = window.GetParentResourceName ? window.GetParentResourceName() : 'rnv-inventory';
 const isBrowser = !window.invokeNative;
@@ -94,7 +94,7 @@ Vue.createApp({
             deskTake: 0,
             dealTip: null,
             modal: null, // { kind: 'destroy'|'split'|'buy', title, ... }
-            // ghost = grey picture shown while the slot is empty (inventory.jpg)
+            // ghost = grey picture shown while the slot is empty
             fixed: [
                 { slot: SLOT_W1, cls: 'w1', ghost: 'rc_5_56_mk1' }, { slot: SLOT_W2, cls: 'w2', ghost: 'dp_9_mk1' },
                 { slot: SLOT_ARMOR, cls: 'armor', ghost: 'light_body_armor' }, { slot: SLOT_BAG, cls: 'bag', ghost: 'sports_bag_2' },
@@ -105,7 +105,7 @@ Vue.createApp({
     },
 
     computed: {
-        // A real container on the left (trunk, stash, shop...). There are no ground drops.
+        // A real container on the left (trunk, stash, shop...). There are no ground drops
         container() {
             return this.right && this.right.type !== 'newdrop' && this.right.type !== 'drop' ? this.right : null;
         },
@@ -113,7 +113,7 @@ Vue.createApp({
             if (!this.right) return '';
             return this.right.label || (this.right.type === 'newdrop' ? 'Drop' : this.right.type);
         },
-        // Fence deal (USER-SCREENSHOTS fence shot): item cost, sale bonus = Notoriety + 1% per `per` $ (max `max`), total
+        // Fence deal: item cost, sale bonus = Notoriety + 1% per `per` $ (max `max`), total
         fence() {
             const m = this.market;
             if (!m || m.mode !== 'fence' || !this.right) return { cost: 0, growth: 0, pct: 0, bonus: 0, total: 0 };
@@ -186,7 +186,7 @@ Vue.createApp({
             return size ? [size[0], size[1]] : [1, 1];
         },
         label(item) { return (item.metadata && item.metadata.label) || (this.items[item.name] && this.items[item.name].label) || item.name; },
-        // ROB RUN sell price from the item data (MetaForge rnv.sell)
+        // sell price from the item data (rnv.sell)
         price(item) { const d = this.items[item.name]; return d && d.rnv && d.rnv.sell ? d.rnv.sell : 0; },
         description(item) { return (item.metadata && item.metadata.description) || (this.items[item.name] && this.items[item.name].description) || ''; },
         image(item) {
@@ -261,7 +261,7 @@ Vue.createApp({
             const bx = (slotB - 1) % COLS, by = Math.floor((slotB - 1) / COLS);
             return ax < bx + wB && bx < ax + wA && ay < by + hB && by < ay + hA;
         },
-        // Items in the way of `item` at `slot`. Moving inside one inventory ignores the item itself.
+        // Items in the way of `item` at `slot`. Moving inside one inventory ignores the item itself
         blockers(side, slot, item, ignoreSelf) {
             const inv = this.inv(side);
             const [w, h] = this.sizeOf(item.name);
@@ -370,7 +370,7 @@ Vue.createApp({
             if (t.side === drag.side && t.slot === drag.item.slot) return;
             this.move(drag.side, drag.item, t.side, t.slot);
         },
-        // Moves locally at once, then asks the server; a refusal puts everything back.
+        // Moves locally at once, then asks the server; a refusal puts everything back
         // count < item.count moves part of a stack (split) into an empty cell
         async move(fromSide, item, toSide, toSlot, count) {
             const fromInv = this.inv(fromSide), toInv = this.inv(toSide);
@@ -379,7 +379,7 @@ Vue.createApp({
             const fromSlot = item.slot;
             count = count || item.count;
 
-            // Cash: one slot holds at most MONEY_STACK (ata_ox config); a merge moves only what fits
+            // Cash: one slot holds at most MONEY_STACK (extras config); a merge moves only what fits
             if (target && target !== item && item.name === 'money' && target.name === 'money') {
                 const room = MONEY_STACK - target.count;
                 if (room <= 0) return false;
@@ -472,7 +472,7 @@ Vue.createApp({
             if (resp && resp.data) this.market = resp.data;
         },
         offerClick(o) {
-            // Stackable offers (ammo) ask how many first (AMMO-BUY.png)
+            // Stackable offers (ammo) ask how many first
             if (o.state === 'buy' && o.max) {
                 const afford = Math.floor(this.market.cash / o.price);
                 const max = Math.max(1, Math.min(o.max, afford));

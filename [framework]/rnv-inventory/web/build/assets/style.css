@@ -2,7 +2,7 @@
 @font-face { font-family: 'BerninoCond'; src: url('fonts/Bernino_Sans_Condensed_Bold.otf'); font-weight: 700; }
 @font-face { font-family: 'BerninoCond'; src: url('fonts/Bernino_Sans_Condensed_Extrabold_Italic.otf'); font-weight: 800; font-style: italic; }
 
-/* 1rem = 10px at 1080p (WIKI/images/inventory/inventory.jpg is the reference) */
+/* 1rem = 10px at 1080p */
 html { font-size: calc(100vh / 108); }
 /* Line between grid cells: never thinner than 1px, or cells melt together below 1080p */
 :root { --gap: max(1px, 0.1rem); }
@@ -35,7 +35,7 @@ body { width: 100vw; height: 100vh; overflow: hidden; background: transparent; f
         linear-gradient(-45deg, transparent calc(50% - 0.07rem), #494843 calc(50% - 0.07rem), #494843 calc(50% + 0.07rem), transparent calc(50% + 0.07rem));
 }
 .cell.ok, .fixed.ok { box-shadow: inset 0 0 0 0.2rem #c4fb32; }
-/* hover = lime frame (inventory.jpg), not while dragging */
+/* hover = lime frame, not while dragging */
 .inv:not(.dragging) .cell:not(.locked):hover, .inv:not(.dragging) .item:not(.ghost):hover { box-shadow: inset 0 0 0 0.2rem #c4fb32; }
 /* where the dragged item lands (steam shot: lime block with the item) */
 .preview { position: absolute; z-index: 3; pointer-events: none; background: rgba(196, 251, 50, 0.92); transition: left 0.06s, top 0.06s; }
@@ -87,7 +87,7 @@ body { width: 100vw; height: 100vh; overflow: hidden; background: transparent; f
 .tip-row { font-size: 1.5rem; font-weight: 600; color: #b9b5ad; }
 .tip-desc { margin-top: 0.6rem; font-size: 1.5rem; font-weight: 600; color: #d8d4cc; }
 
-/* ===== RUN V Black Market (WIKI ui/market.jpg) ===== */
+/* ===== Black Market ===== */
 .inv.market { background: radial-gradient(ellipse at 50% 55%, #4f4f4f 0%, #3a3a37 45%, #2c2c29 100%); }
 .bm-mark { position: absolute; left: 10rem; top: -6rem; font-size: 46rem; font-weight: 800; font-style: italic; color: rgba(255, 255, 255, 0.025); white-space: nowrap; pointer-events: none; }
 .bm-title { position: absolute; left: 3.8rem; top: 4.4rem; font-size: 6.4rem; font-weight: 800; font-style: italic; transform: scaleX(0.75); transform-origin: left top; white-space: nowrap; }
@@ -131,7 +131,7 @@ body { width: 100vw; height: 100vh; overflow: hidden; background: transparent; f
 .inv.market .panel.main .equip-title { left: 49.2rem; width: 27.4rem; }
 .inv.market .panel.main .money, .inv.market .panel.main .foot { display: none; }
 
-/* ===== RUN V Suspicious Door (WIKI motel/suspicious-door-barter.webp) ===== */
+/* ===== Suspicious Door ===== */
 .door-panel { position: absolute; left: 102.3rem; top: 16.3rem; width: 67.2rem; bottom: 0; background: #2b2b29; border-top: 0.4rem solid #e6ded7; }
 .door-title { height: 10.4rem; padding-left: 3.6rem; display: flex; align-items: center; font-size: 4.8rem; font-weight: 800; font-style: italic; color: #eae5e5; }
 .door-list { position: absolute; left: 3.6rem; right: 3.4rem; top: 13.4rem; bottom: 6.6rem; overflow-y: auto; }
@@ -158,7 +158,7 @@ body { width: 100vw; height: 100vh; overflow: hidden; background: transparent; f
 .deal-tip-desc { padding: 2.6rem 3.4rem 0; font-size: 2rem; font-weight: 700; }
 .deal-tip-price { padding: 2.6rem 3.4rem 3rem; text-align: right; font-size: 2.6rem; font-weight: 800; }
 
-/* ===== RUN V Plot Plan (WIKI housing/land-plot-modification.webp, 1024px wide: x 1.875) ===== */
+/* ===== Plot Plan ===== */
 .plot-label { position: absolute; left: 1.7rem; font-size: 1.6rem; font-weight: 700; color: #b9b5ad; }
 .plot-label.l1 { top: 5.6rem; }
 .plot-label.l2 { top: 25.2rem; }
@@ -171,7 +171,7 @@ body { width: 100vw; height: 100vh; overflow: hidden; background: transparent; f
 .plot-slot.ok { box-shadow: inset 0 0 0 0.2rem #c4fb32; }
 .plot-slot.bad { box-shadow: inset 0 0 0 0.2rem #d9483b; }
 
-/* ===== RUN V Laundering Desk (WIKI laundering/launder-desk.jpg, launder-transfer.jpg; panel x 665-1083, y 139-707) ===== */
+/* ===== Laundering Desk ===== */
 .ldesk { position: absolute; left: 66.5rem; top: 13.9rem; width: 41.8rem; height: 56.8rem; background: rgba(58, 56, 52, 0.62); }
 .desk-title { position: absolute; left: 1.4rem; top: 1.3rem; font-size: 2.6rem; font-weight: 800; font-style: italic; }
 .desk-help { position: absolute; right: 1.8rem; top: 1.8rem; width: 1.6rem; height: 1.6rem; border-radius: 50%; background: #8a8781; color: #3a3833; font-size: 1.2rem; font-weight: 700; display: flex; align-items: center; justify-content: center; }
@@ -209,7 +209,7 @@ body { width: 100vw; height: 100vh; overflow: hidden; background: transparent; f
 .desk-bank .val svg { width: 1.8rem; height: 1.8rem; margin-left: 0.3rem; fill: #e8c341; }
 
 
-/* ===== RUN V Smuggler's Van (WIKI production/smuggler-cargo-sale.webp: panel x 1157-1581, y 309-773) ===== */
+/* ===== Smuggler's Van ===== */
 .smug { position: absolute; left: 115.7rem; top: 30.9rem; width: 42.4rem; height: 46.4rem; background: rgba(48, 47, 44, 0.7); border-top: 0.3rem solid #e6e3dd; }
 .smug-title { position: absolute; left: 2.2rem; top: 2rem; font-size: 2.6rem; font-weight: 800; font-style: italic; }
 .smug-help { top: 7.4rem; right: 1.6rem; z-index: 2; }
@@ -227,7 +227,7 @@ body { width: 100vw; height: 100vh; overflow: hidden; background: transparent; f
 .plot-slot.s5 { left: 1.7rem; top: 43rem; }
 .plot-slot.s6 { left: 17.1rem; top: 43rem; }
 
-/* ===== RUN V Grow Table (WIKI production/grow-room.webp: tiles 144x140, TAKE bar under each) ===== */
+/* ===== Grow Table: tiles with a TAKE bar under each ===== */
 .grow-help { top: 1.9rem; }
 .pots { position: absolute; left: 1.6rem; top: 5.4rem; width: 45.6rem; display: flex; flex-wrap: wrap; }
 .pot { width: 14.4rem; margin: 0 0.8rem 0.8rem 0; background: #2f4529; }
@@ -242,7 +242,7 @@ body { width: 100vw; height: 100vh; overflow: hidden; background: transparent; f
 .pot-btn { margin: 0 0.8rem 0.8rem; height: 3rem; background: #5a5a56; color: #c6ff39; font-size: 2rem; font-weight: 800; display: flex; align-items: center; justify-content: center; cursor: pointer; }
 .pot-btn.off { opacity: 0.45; cursor: default; }
 
-/* ===== Confirm / amount window (USER-SCREENSHOTS CONFIRMATION.png, AMMO-BUY.png; 1080p: band 388-628, bar 628-692) ===== */
+/* ===== Confirm / amount window ===== */
 .modal { position: fixed; inset: 0; z-index: 40; background: rgba(26, 26, 24, 0.55); backdrop-filter: blur(0.6rem); }
 .mband { position: absolute; left: 0; right: 0; top: 38.8rem; height: 24rem; background: #eeebe4; }
 .mtitle { position: absolute; left: 0; right: 0; top: 2.6rem; text-align: center; font-size: 6.4rem; font-weight: 800; font-style: italic; color: #121212; letter-spacing: -0.05rem; text-transform: uppercase; }
@@ -265,7 +265,7 @@ body { width: 100vw; height: 100vh; overflow: hidden; background: transparent; f
 .mbtn.ok { background: #c5ff39; color: #1b2608; }
 .mbtn.ok .key { border-color: #6f8f2a; background: #a9d92e; color: #1b2608; }
 
-/* ===== Fence (USER-SCREENSHOTS fence shot, 1080p: panel x 30-523, y 37-840) ===== */
+/* ===== Fence ===== */
 .panel.left.fence .grid { height: 53.2rem; width: 46.4rem; overflow-y: scroll; }
 .panel.left.fence .grid::-webkit-scrollbar { width: 0.4rem; }
 .panel.left.fence .grid::-webkit-scrollbar-thumb { background: #bdbab4; }

@@ -1,4 +1,4 @@
--- rnv-core lib (credits and license: lib/NOTICE.md)
+-- rnv-core lib
 -- Other resources load it with shared_script '@rnv-core/lib/init.lua', then use lib.x and cache
 -- lib.x loads lib/x_shared.lua + lib/x_<client|server>.lua the first time it's used
 

@@ -1,9 +1,7 @@
 -- Shared table for all rnv-core server files
 RNV = {}
 
----@type table<integer, table> source -> player
 RNV.Players = {}
----@type table<string, integer> citizenid -> source
 RNV.ByCitizenId = {}
 
 RNV.Cycle = nil ---@type integer?
@@ -12,17 +10,12 @@ function RNV.Debug(...)
     if Config.Debug then lib.print.info(...) end
 end
 
----@param src? integer|string
 function RNV.Actor(src)
     if not src or src == 0 then return GetInvokingResource() or 'console' end
     local player = RNV.Players[tonumber(src)]
     return player and player.citizenid or ('src:%s'):format(src)
 end
 
----@param actor string
----@param action string
----@param target? string
----@param data? table
 function RNV.Audit(actor, action, target, data)
     MySQL.insert('INSERT INTO audit_log (actor, action, target, data) VALUES (?, ?, ?, ?)', {
         actor, action, target, data and json.encode(data) or nil,
@@ -54,7 +47,6 @@ MySQL.ready(function()
     lib.print.info(('[%s] core ready (cycle %s)'):format(Config.Prefix, RNV.Cycle))
 end)
 
----@param perm string ACE permission, e.g. 'admin'
 function RNV.HasPermission(src, perm)
     return IsPlayerAceAllowed(tostring(src), perm)
 end

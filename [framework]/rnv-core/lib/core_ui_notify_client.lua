@@ -26,7 +26,7 @@ end
 
 
 function lib.defaultNotify(data)
-    -- Backwards compat for v3
+    -- Old v3 format still works
     data.type = data.status
     if data.type == 'inform' then data.type = 'info' end
     return lib.notify(data)

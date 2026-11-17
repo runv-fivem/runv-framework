@@ -1,4 +1,4 @@
--- Add additional functions to the standard table library
+-- Extra functions for the table library
 
 lib.table = table
 local pairs = pairs

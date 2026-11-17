@@ -4,8 +4,8 @@ Extras = {
     Dev = true,
 
     -- Vests for armour slot 57: item = level. Max armour = level x 25 (one bar per armour plate). 'armour' = old item
-    -- ROB RUN body armour (MetaForge 'Armor segments'): Light 1, Medium 2, Assault 3, Heavy 4, Bastion 4
-    -- Cash: at most this much money in one slot (ROB RUN). More money opens another slot; split works as usual
+    -- Body armour bars: Light 1, Medium 2, Assault 3, Heavy 4, Bastion 4
+    -- Cash: at most this much money in one slot. More money opens another slot; split works as usual
     MoneyStack = 25000,
 
     Vests = { light_body_armor = 1, medium_body_armor = 2, assault_body_armor = 3, heavy_body_armor = 4, bastion_body_armor = 4 },
@@ -18,7 +18,7 @@ Extras = {
         enabled = true,
         baseRows = 2, -- open grid rows with no bag
         items = {
-            -- ROB RUN Sports Bag 'Inventory rows' 2/4/6, added to the base rows; Versatile Pouch 'Pockets' 1-4
+            -- Sports Bag rows 2/4/6, added to the base rows; Versatile Pouch cells 1-4
             sports_bag_2 = { kind = 'back', rows = 4, back = { male = { 81, 0 }, female = { 81, 0 } } },
             sports_bag_3 = { kind = 'back', rows = 6, back = { male = { 81, 0 }, female = { 81, 0 } } },
             sports_bag_4 = { kind = 'back', rows = 8, back = { male = { 81, 0 }, female = { 81, 0 } } },

@@ -492,7 +492,7 @@ local function useSlot(slot, noAnim)
 
 			if data.export then
 				return data.export(data, {name = item.name, slot = item.slot, metadata = item.metadata})
-			elseif data.client.event then -- re-add it, so I don't need to deal with morons taking screenshots of errors when using trigger event
+			elseif data.client.event then -- re-add it, so a wrong TriggerEvent doesn't spam errors
 				return TriggerEvent(data.client.event, data, {name = item.name, slot = item.slot, metadata = item.metadata})
 			end
 		end

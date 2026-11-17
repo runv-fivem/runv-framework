@@ -20,8 +20,6 @@ local function notify(account, amount, balance, reason)
     end
 end
 
----@return integer? accountId
----@return string? err 'invalid' | 'exists'
 function RNV.OpenAccount(ownerType, ownerId, accountType, actor)
     accountType = accountType or 'bank'
     if not Config.OwnerTypes[ownerType] or not Config.AccountTypes[accountType] or not ownerId then
@@ -69,7 +67,6 @@ local function isDuplicate(query, ref)
     return rows and rows[1] ~= nil
 end
 
----@param delta integer positive = credit, negative = debit
 local function change(accountId, delta, reason, ref, actor)
     accountId = tonumber(accountId)
     if not accountId then return false, 'invalid' end
@@ -87,9 +84,6 @@ local function change(accountId, delta, reason, ref, actor)
     return true, balance
 end
 
----@param ref? string unique id of this payment (e.g. 'robbery:fleeca1:1699999'), prevents double pay
----@return boolean ok
----@return integer|string balanceOrError
 function RNV.AddMoney(accountId, amount, reason, ref, actor)
     amount = validAmount(amount)
     if not amount or type(reason) ~= 'string' then return false, 'invalid' end

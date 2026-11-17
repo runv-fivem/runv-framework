@@ -1,4 +1,4 @@
--- require for every resource (MPL-2.0, see NOTICE.md)
+-- require for every resource
 -- require 'a.b' loads a/b.lua from the calling resource, '@res.a.b' from another resource
 
 if (runtime and runtime.require) then return end
@@ -32,7 +32,7 @@ local baseIdx = 2
 for i = baseIdx, 32 do
     local src = (debug_getinfo(i, 'S') and debug_getinfo(i, 'S').short_src)
 
-    -- this may be fragile with breaking updates and especially "enhanced"
+    -- may break with future FiveM updates (mostly the enhanced build)
     if not src or src == 'citizen:/scripting/lua/scheduler.lua' then
         baseIdx = i + 2
         break
